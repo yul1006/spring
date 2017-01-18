@@ -16,9 +16,7 @@ import spring.domain.User;
 @Controller
 @RequestMapping("/user")//중복 없애기 위함
 public class UserController {
-	
-	
-	
+
 
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);//클래스마다 따로 로그
 	private List<User> users = new ArrayList<>();
@@ -28,8 +26,7 @@ public class UserController {
 		users.add(user);
 		log.debug("user "+users);
 		log.info("user size "+users.size());
-		//System.out.println("user "+users);
-		//System.out.println("user size "+users.size());
+	
 		return "redirect:/user/list";
 	}
 	
