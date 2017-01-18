@@ -32,11 +32,8 @@ public class QuestionController {
 
 	@GetMapping("/")
 	public String list(Model model) {
-		model.addAttribute("questions", questions);// "users"가 list.html에서 사용하는
-													// 변수명 ,
-
-		return "/qna/index";// 디렉토리의 list에 접근해서 html 읽어서 뿌린것 =
-										// localhost:9090/user/list.html
+		model.addAttribute("questions", questions);
+		return "/qna/index";
 	}
 
 }
