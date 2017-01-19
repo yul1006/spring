@@ -1,7 +1,14 @@
 package spring.domain;
 
-public class Question {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
+public class Question {
+	@Id @GeneratedValue
+	private long id;
+	
 	
 	private String writer;
 	
