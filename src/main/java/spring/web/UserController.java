@@ -21,7 +21,7 @@ import spring.domain.UserRepository;
 import spring.utils.HttpSessionUtils;
 
 @Controller
-@RequestMapping("/user") // 중복 없애기 위함
+@RequestMapping("/users") // 중복 없애기 위함
 public class UserController {
 
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);// 클래스마다
@@ -38,11 +38,11 @@ public class UserController {
 		User user = userRepository.findByUserId(userId);
 
 		if (user == null) {
-			return "redirect:/user/login.html";
+			return "redirect:/users/login.html";
 		}
 
 		if (!user.matchPassword(password)) {
-			return "redirect:/user/login.html";
+			return "redirect:/users/login.html";
 
 		}
 
@@ -54,23 +54,23 @@ public class UserController {
 
 	@GetMapping("/form")
 	public String form() {
-
-		return "/user/form";
+	
+		return "/users/form";
 	}
 
 	@GetMapping("/login")
 	public String login() {
 
-		return "/user/login";
+		return "/users/login";
 	}
 
-	@PostMapping("/create")
+	@PostMapping("create")
 	public String create(User user) {
 		userRepository.save(user);
 		log.debug("user " + users);
 		// log.info("user size "+users.size());
 
-		return "redirect:/user/list";
+		return "redirect:/users/list";
 	}
 
 	@GetMapping("/{id}/form")
@@ -80,7 +80,7 @@ public class UserController {
 		
 		model.addAttribute("user", userRepository.findOne(id));
 	
-		return "/user/updateForm";
+		return "/users/updateForm";
 	}
 
 	private void checkOwner(Long id, HttpSession session) {
@@ -101,7 +101,7 @@ public class UserController {
 		User dbUser = userRepository.findOne(id);
 		dbUser.update(user);
 		userRepository.save(dbUser);
-		return "redirect:/user/list";
+		return "redirect:/users/list";
 	}
 	
 	
@@ -112,8 +112,7 @@ public class UserController {
 		model.addAttribute("users", userRepository.findAll());// "users"가
 																// list.html에서
 																// 사용하는 변수명 ,
-
-		return "/user/list";// 디렉토리의 list에 접근해서 html 읽어서 뿌린것 =
+		return "/users/list";// 디렉토리의 list에 접근해서 html 읽어서 뿌린것 =
 							// localhost:9090/user/list.html
 	}
 }

@@ -3,6 +3,8 @@ package spring.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import spring.domain.Question;
 import spring.domain.QuestionRepository;
+import spring.domain.User;
+import spring.utils.HttpSessionUtils;
 
 @Controller
 public class QuestionController {
@@ -57,6 +61,20 @@ public class QuestionController {
 	}
 	
 	
-	
+	@PostMapping("")
+	public String create(String title, String contents, HttpSession session){
+		
+		if(!HttpSessionUtils.isLoginUser(session)){
+			return "/users/loginForm";
+		}
+		
+		User sessionUser = HttpSessionUtils.getUserFromSession(session);
+		Question newQuestion = new Question(sessionUser, title, contents);
+		questionRepository.save(newQuestion);
+		
+		return "redirect:/qna/index";
+		
+	}
 
+	
 }

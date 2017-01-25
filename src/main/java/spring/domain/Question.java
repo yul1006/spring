@@ -3,14 +3,15 @@ package spring.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Question {
 	@Id @GeneratedValue
 	private long id;
 	
-	
-	private String writer;
+	@ManyToOne
+	private User writer;
 	
 	private String title;
 	
@@ -23,9 +24,8 @@ public class Question {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
 
-	public Question(String writer, String title, String contents) {
+	public Question(User writer, String title, String contents) {
 		super();
 		this.writer = writer;
 		this.title = title;
@@ -34,7 +34,7 @@ public class Question {
 
 
 
-	public void setWriter(String writer) {
+	public void setWriter(User writer) {
 		this.writer = writer;
 	}
 
